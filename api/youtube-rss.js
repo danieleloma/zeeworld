@@ -90,6 +90,7 @@ module.exports = async function handler(req, res) {
   }
 
   const { channelId, user, handle, format, cacheSeconds, max } = req.query;
+  const { DEFAULT_CHANNEL_ID, DEFAULT_HANDLE } = process.env;
 
   try {
     let id = channelId;
@@ -99,9 +100,13 @@ module.exports = async function handler(req, res) {
         id = await resolveToChannelId({ handle: String(handle) });
       } else if (user) {
         id = await resolveToChannelId({ user: String(user) });
+      } else if (DEFAULT_CHANNEL_ID) {
+        id = String(DEFAULT_CHANNEL_ID);
+      } else if (DEFAULT_HANDLE) {
+        id = await resolveToChannelId({ handle: String(DEFAULT_HANDLE) });
       } else {
         return res.status(400).json({
-          error: 'Missing parameter: provide one of channelId, handle, or user'
+          error: 'Missing parameter: provide one of channelId, handle, or user (or set DEFAULT_CHANNEL_ID/DEFAULT_HANDLE env vars)'
         });
       }
     }
