@@ -8,11 +8,11 @@
     body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 24px; }
     header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
     input, select, button { font-size: 16px; padding: 6px 10px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .card { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff; cursor: pointer; transition: transform 0.2s; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+    .card { border: none; border-radius: 0; overflow: hidden; background: transparent; cursor: pointer; transition: transform 0.2s; }
     .card:hover { transform: translateY(-2px); }
-    .thumb-container { position: relative; }
-    .thumb { width: 100%; height: 146px; object-fit: cover; background: #f3f4f6; display: block; }
+    .thumb-container { position: relative; border-radius: 12px; overflow: hidden; }
+    .thumb { width: 100%; height: 180px; object-fit: cover; background: #f3f4f6; display: block; border-radius: 0; }
     .play-button { 
       position: absolute; 
       top: 50%; 
@@ -37,9 +37,9 @@
       border-bottom: 12px solid transparent;
       margin-left: 4px;
     }
-    .content { padding: 12px; }
-    .title { font-weight: 600; margin: 0 0 6px; font-size: 16px; line-height: 1.3; }
-    .meta { color: #6b7280; font-size: 12px; }
+    .content { padding: 8px 0 0 0; }
+    .title { font-weight: 500; margin: 0 0 4px; font-size: 14px; line-height: 1.4; color: #0f0f23; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .meta { color: #606060; font-size: 13px; margin: 0; }
     
     /* Video Modal */
     .modal {
