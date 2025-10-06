@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "routes": [
+    { "src": "/youtube-rss", "dest": "/api/youtube-rss.js" },
+    { "src": "/youtube-rss/(.*)", "dest": "/api/youtube-rss.js" }
+  ],
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
+}
+
+
