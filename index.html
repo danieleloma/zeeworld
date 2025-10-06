@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YouTube RSS Demo</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji"; margin: 24px; }
+    header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+    input, select, button { font-size: 16px; padding: 6px 10px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .card { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff; }
+    .thumb { width: 100%; height: 146px; object-fit: cover; background: #f3f4f6; }
+    .content { padding: 12px; }
+    .title { font-weight: 600; margin: 0 0 6px; font-size: 16px; line-height: 1.3; }
+    .meta { color: #6b7280; font-size: 12px; }
+  </style>
+  <script>
+    async function fetchFeed() {
+      const channelId = document.getElementById('channelId').value.trim();
+      const max = document.getElementById('max').value.trim() || '10';
+      if (!channelId) { alert('Enter a channelId'); return; }
+      const url = `/youtube-rss?channelId=${encodeURIComponent(channelId)}&format=json&max=${encodeURIComponent(max)}`;
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) { alert('Request failed'); return; }
+      const data = await res.json();
+      document.getElementById('channelName').textContent = data.channel || 'Channel';
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      (data.entries || []).forEach(item => {
+        const a = document.createElement('a');
+        a.href = item.link || `https://www.youtube.com/watch?v=${item.id}`;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.className = 'card';
+        a.innerHTML = `
+          <img class="thumb" src="${item.thumbnail || ''}" alt="" />
+          <div class="content">
+            <p class="title">${(item.title || '').replace(/</g, '&lt;')}</p>
+            <p class="meta">${new Date(item.published || item.updated || Date.now()).toLocaleString()}</p>
+          </div>
+        `;
+        grid.appendChild(a);
+      });
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('channelId').value = 'UCdxk_T-82-s_J4ChPpw2sdg';
+      fetchFeed();
+    });
+  </script>
+  </head>
+  <body>
+    <header>
+      <strong id="channelName">Channel</strong>
+    </header>
+    <div style="margin-bottom: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+      <input id="channelId" placeholder="channelId (e.g. UC...)" />
+      <input id="max" placeholder="max (default 10)" type="number" min="1" max="50" />
+      <button onclick="fetchFeed()">Load</button>
+    </div>
+    <div id="grid" class="grid"></div>
+  </body>
+  </html>
+
+
