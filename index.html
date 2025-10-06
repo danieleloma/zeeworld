@@ -9,13 +9,130 @@
     header { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
     input, select, button { font-size: 16px; padding: 6px 10px; }
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .card { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff; }
-    .thumb { width: 100%; height: 146px; object-fit: cover; background: #f3f4f6; }
+    .card { border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden; background: #fff; cursor: pointer; transition: transform 0.2s; }
+    .card:hover { transform: translateY(-2px); }
+    .thumb-container { position: relative; }
+    .thumb { width: 100%; height: 146px; object-fit: cover; background: #f3f4f6; display: block; }
+    .play-button { 
+      position: absolute; 
+      top: 50%; 
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      background: rgba(0, 0, 0, 0.7); 
+      border-radius: 50%; 
+      width: 60px; 
+      height: 60px; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .play-button:hover { background: rgba(0, 0, 0, 0.8); }
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-left: 20px solid white;
+      border-top: 12px solid transparent;
+      border-bottom: 12px solid transparent;
+      margin-left: 4px;
+    }
     .content { padding: 12px; }
     .title { font-weight: 600; margin: 0 0 6px; font-size: 16px; line-height: 1.3; }
     .meta { color: #6b7280; font-size: 12px; }
+    
+    /* Video Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: #000;
+      border-radius: 8px;
+      padding: 20px;
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+    }
+    .close-button:hover { background: rgba(0, 0, 0, 0.9); }
+    iframe {
+      border-radius: 4px;
+    }
+    
+    /* Controls */
+    .controls {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   </style>
   <script>
+    let autoplayEnabled = true;
+    
+    function showVideoModal(videoId) {
+      if (!autoplayEnabled) {
+        window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function hideVideoModal() {
+      const modal = document.getElementById('videoModal');
+      const iframe = document.getElementById('videoFrame');
+      iframe.src = '';
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    function toggleAutoplay() {
+      autoplayEnabled = document.getElementById('autoplayToggle').checked;
+    }
+    
     async function fetchFeed() {
       const channelId = document.getElementById('channelId').value.trim();
       const max = document.getElementById('max').value.trim() || '10';
@@ -28,23 +145,30 @@
       const grid = document.getElementById('grid');
       grid.innerHTML = '';
       (data.entries || []).forEach(item => {
-        const a = document.createElement('a');
-        a.href = item.link || `https://www.youtube.com/watch?v=${item.id}`;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.className = 'card';
-        a.innerHTML = `
-          <img class="thumb" src="${item.thumbnail || ''}" alt="" />
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => showVideoModal(item.id);
+        card.innerHTML = `
+          <div class="thumb-container">
+            <img class="thumb" src="${item.thumbnail || ''}" alt="" />
+            <div class="play-button">
+              <div class="play-icon"></div>
+            </div>
+          </div>
           <div class="content">
             <p class="title">${(item.title || '').replace(/</g, '&lt;')}</p>
             <p class="meta">${new Date(item.published || item.updated || Date.now()).toLocaleString()}</p>
           </div>
         `;
-        grid.appendChild(a);
+        grid.appendChild(card);
       });
     }
+    
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('channelId').value = 'UCdxk_T-82-s_J4ChPpw2sdg';
+      document.getElementById('videoModal').addEventListener('click', (e) => {
+        if (e.target.id === 'videoModal') hideVideoModal();
+      });
       fetchFeed();
     });
   </script>
@@ -53,12 +177,31 @@
     <header>
       <strong id="channelName">Channel</strong>
     </header>
-    <div style="margin-bottom: 12px; display: flex; gap: 8px; flex-wrap: wrap;">
+    <div class="controls">
       <input id="channelId" placeholder="channelId (e.g. UC...)" />
       <input id="max" placeholder="max (default 10)" type="number" min="1" max="50" />
       <button onclick="fetchFeed()">Load</button>
+      <div class="checkbox-container">
+        <input type="checkbox" id="autoplayToggle" checked onchange="toggleAutoplay()" />
+        <label for="autoplayToggle">Autoplay in modal</label>
+      </div>
     </div>
     <div id="grid" class="grid"></div>
+    
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+      <div class="modal-content">
+        <button class="close-button" onclick="hideVideoModal()">×</button>
+        <iframe 
+          id="videoFrame" 
+          width="560" 
+          height="315" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
   </body>
   </html>
 
