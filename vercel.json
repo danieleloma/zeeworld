@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/youtube-rss", "destination": "/api/youtube-rss" },
+    { "source": "/youtube-rss/(.*)", "destination": "/api/youtube-rss" },
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
+}
+
+
