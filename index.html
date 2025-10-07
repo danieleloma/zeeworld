@@ -1010,7 +1010,7 @@ type Props = {
 
 export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
   const {
-    domain = "myyoutubefeed-bh21otyyb-danieleloma-wonderadsios-projects.vercel.app",
+    domain = "myyoutubefeed-d9ls0uspl-danieleloma-wonderadsios-projects.vercel.app",
     channelId = "UCdxk_T-82-s_J4ChPpw2sdg",
     handle = "",
     max = 12,
@@ -1061,8 +1061,8 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
         if (!active) return;
         setEntries(Array.isArray(d?.entries) ? d.entries : []);
       })
-      .catch((e) =&gt; active &&amp; setError(e.message || "Failed to load"))
-      .finally(() =&gt; active &&amp; setLoading(false));
+      .catch((e) =&gt; active && setError(e.message || "Failed to load"))
+      .finally(() =&gt; active && setLoading(false));
 
     return () =&gt; {
       active = false;
@@ -1104,7 +1104,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
   }
 
   return React.createElement(React.Fragment, null,
-    playingVideo &&amp; React.createElement("div", {
+    playingVideo && React.createElement("div", {
       style: {
         position: "fixed",
         top: 0,
@@ -1152,7 +1152,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
         React.createElement("iframe", {
           width: autoplayWidth,
           height: autoplayHeight,
-          src: `https://www.youtube.com/embed/${playingVideo}?autoplay=1&amp;rel=0`,
+          src: `https://www.youtube.com/embed/${playingVideo}?autoplay=1&rel=0`,
           title: "YouTube video player",
           frameBorder: 0,
           allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
@@ -1180,7 +1180,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
           }
         },
           React.createElement("div", { style: { position: "relative", borderRadius: 12, overflow: "hidden" } },
-            e.thumbnail &&amp; React.createElement(React.Fragment, null,
+            e.thumbnail && React.createElement(React.Fragment, null,
               React.createElement("img", {
                 src: e.thumbnail,
                 alt: "",
@@ -1191,7 +1191,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
                   display: "block",
                 }
               }),
-              enableAutoplay &&amp; React.createElement("div", {
+              enableAutoplay && React.createElement("div", {
                 style: {
                   position: "absolute",
                   top: "50%",
@@ -1234,7 +1234,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
                 overflow: "hidden",
               }
             }, e.title),
-            showMeta &&amp; React.createElement("div", {
+            showMeta && React.createElement("div", {
               style: { 
                 color: metaColor, 
                 fontSize: metaFontSize, 
@@ -1250,7 +1250,7 @@ export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
 }
 
 addPropertyControls(YouTubeGrid, {
-  domain: { type: ControlType.String, title: "Domain", defaultValue: "myyoutubefeed-bh21otyyb-danieleloma-wonderadsios-projects.vercel.app" },
+  domain: { type: ControlType.String, title: "Domain", defaultValue: "myyoutubefeed-d9ls0uspl-danieleloma-wonderadsios-projects.vercel.app" },
   channelId: { type: ControlType.String, title: "Channel ID", defaultValue: "UCdxk_T-82-s_J4ChPpw2sdg" },
   handle: { type: ControlType.String, title: "Handle (@...)", defaultValue: "" },
   max: { type: ControlType.Number, title: "Max Videos", min: 1, max: 50, defaultValue: 12 },
