@@ -4,7 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube RSS Feed Generator - MyYouTubeFeed</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            /* Material 3 Color Tokens */
+            --md-sys-color-primary: #6750a4;
+            --md-sys-color-on-primary: #ffffff;
+            --md-sys-color-primary-container: #eaddff;
+            --md-sys-color-on-primary-container: #21005d;
+            --md-sys-color-secondary: #625b71;
+            --md-sys-color-on-secondary: #ffffff;
+            --md-sys-color-secondary-container: #e8def8;
+            --md-sys-color-on-secondary-container: #1d192b;
+            --md-sys-color-tertiary: #7d5260;
+            --md-sys-color-on-tertiary: #ffffff;
+            --md-sys-color-tertiary-container: #ffd8e4;
+            --md-sys-color-on-tertiary-container: #31111d;
+            --md-sys-color-error: #ba1a1a;
+            --md-sys-color-on-error: #ffffff;
+            --md-sys-color-error-container: #ffdad6;
+            --md-sys-color-on-error-container: #410002;
+            --md-sys-color-surface: #fffbfe;
+            --md-sys-color-on-surface: #1c1b1f;
+            --md-sys-color-surface-variant: #e7e0ec;
+            --md-sys-color-on-surface-variant: #49454f;
+            --md-sys-color-outline: #79747e;
+            --md-sys-color-outline-variant: #cac4d0;
+            --md-sys-color-shadow: #000000;
+            --md-sys-color-scrim: #000000;
+            --md-sys-color-inverse-surface: #313033;
+            --md-sys-color-inverse-on-surface: #f4eff4;
+            --md-sys-color-inverse-primary: #d0bcff;
+            
+            /* Material 3 Elevation */
+            --md-sys-elevation-level0: none;
+            --md-sys-elevation-level1: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level2: 0px 1px 2px 0px rgba(0, 0, 0, 0.30), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level3: 0px 1px 3px 0px rgba(0, 0, 0, 0.30), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level4: 0px 2px 3px 0px rgba(0, 0, 0, 0.30), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+            --md-sys-elevation-level5: 0px 4px 4px 0px rgba(0, 0, 0, 0.30), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+            
+            /* Material 3 Typography */
+            --md-sys-typescale-display-large-font: 'Roboto';
+            --md-sys-typescale-display-large-size: 57px;
+            --md-sys-typescale-display-large-weight: 400;
+            --md-sys-typescale-display-large-line-height: 64px;
+            --md-sys-typescale-display-large-tracking: -0.25px;
+            
+            --md-sys-typescale-headline-large-font: 'Roboto';
+            --md-sys-typescale-headline-large-size: 32px;
+            --md-sys-typescale-headline-large-weight: 400;
+            --md-sys-typescale-headline-large-line-height: 40px;
+            
+            --md-sys-typescale-title-large-font: 'Roboto';
+            --md-sys-typescale-title-large-size: 22px;
+            --md-sys-typescale-title-large-weight: 400;
+            --md-sys-typescale-title-large-line-height: 28px;
+            
+            --md-sys-typescale-body-large-font: 'Roboto';
+            --md-sys-typescale-body-large-size: 16px;
+            --md-sys-typescale-body-large-weight: 400;
+            --md-sys-typescale-body-large-line-height: 24px;
+            --md-sys-typescale-body-large-tracking: 0.5px;
+            
+            --md-sys-typescale-label-large-font: 'Roboto';
+            --md-sys-typescale-label-large-size: 14px;
+            --md-sys-typescale-label-large-weight: 500;
+            --md-sys-typescale-label-large-line-height: 20px;
+            --md-sys-typescale-label-large-tracking: 0.1px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -12,38 +81,66 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            line-height: 1.6;
-            color: #0f0f23;
-            background: #ffffff;
+            font-family: var(--md-sys-typescale-body-large-font);
+            font-size: var(--md-sys-typescale-body-large-size);
+            font-weight: var(--md-sys-typescale-body-large-weight);
+            line-height: var(--md-sys-typescale-body-large-line-height);
+            color: var(--md-sys-color-on-surface);
+            background: var(--md-sys-color-surface);
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 16px;
         }
 
-        /* Header */
+        /* Header - Material 3 Hero */
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 60px 0;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+            padding: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                var(--md-sys-color-primary) 0%, 
+                var(--md-sys-color-secondary) 50%,
+                var(--md-sys-color-tertiary) 100%);
+            opacity: 0.8;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
         }
 
         .header h1 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
+            font-family: var(--md-sys-typescale-display-large-font);
+            font-size: var(--md-sys-typescale-display-large-size);
+            font-weight: var(--md-sys-typescale-display-large-weight);
+            line-height: var(--md-sys-typescale-display-large-line-height);
+            letter-spacing: var(--md-sys-typescale-display-large-tracking);
+            margin-bottom: 24px;
         }
 
         .header p {
-            font-size: 1.25rem;
-            opacity: 0.9;
+            font-family: var(--md-sys-typescale-headline-large-font);
+            font-size: var(--md-sys-typescale-headline-large-size);
+            font-weight: var(--md-sys-typescale-headline-large-weight);
+            line-height: var(--md-sys-typescale-headline-large-line-height);
             max-width: 600px;
             margin: 0 auto;
+            opacity: 0.9;
         }
 
         /* Main Content */
@@ -74,14 +171,14 @@
             margin: 0 auto;
         }
 
-        /* Form Styles */
+        /* Form Styles - Material 3 */
         .form-container {
-            background: white;
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            background: var(--md-sys-color-surface);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: var(--md-sys-elevation-level2);
             margin-bottom: 40px;
-            border: 1px solid #e5e7eb;
+            border: 1px solid var(--md-sys-color-outline-variant);
         }
 
         .form-group {
@@ -90,49 +187,64 @@
 
         .form-group label {
             display: block;
-            font-weight: 600;
+            font-family: var(--md-sys-typescale-label-large-font);
+            font-size: var(--md-sys-typescale-label-large-size);
+            font-weight: var(--md-sys-typescale-label-large-weight);
+            line-height: var(--md-sys-typescale-label-large-line-height);
             margin-bottom: 8px;
-            color: #0f0f23;
+            color: var(--md-sys-color-on-surface);
         }
 
         .form-group input,
         .form-group select {
             width: 100%;
-            padding: 12px 16px;
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: border-color 0.2s;
+            padding: 16px;
+            border: 1px solid var(--md-sys-color-outline);
+            border-radius: 4px;
+            font-family: var(--md-sys-typescale-body-large-font);
+            font-size: var(--md-sys-typescale-body-large-size);
+            background: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
         }
 
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: var(--md-sys-color-primary);
+            border-width: 2px;
+            box-shadow: 0 0 0 1px var(--md-sys-color-primary);
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+            background: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
             border: none;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 16px 24px;
+            border-radius: 20px;
+            font-family: var(--md-sys-typescale-label-large-font);
+            font-size: var(--md-sys-typescale-label-large-size);
+            font-weight: var(--md-sys-typescale-label-large-weight);
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+            box-shadow: var(--md-sys-elevation-level1);
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(102, 126, 234, 0.4);
+            box-shadow: var(--md-sys-elevation-level2);
+            transform: translateY(-1px);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+            box-shadow: var(--md-sys-elevation-level1);
         }
 
         .btn:disabled {
-            opacity: 0.6;
+            opacity: 0.38;
             cursor: not-allowed;
             transform: none;
+            box-shadow: var(--md-sys-elevation-level0);
         }
 
         /* Results */
@@ -142,30 +254,44 @@
 
         .video-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 16px;
             margin-top: 24px;
         }
 
+        /* YouTube-style Video Cards */
         .video-card {
-            background: white;
+            background: transparent;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
             cursor: pointer;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+            width: 100%;
+            max-width: 360px;
         }
 
         .video-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transform: scale(1.02);
+        }
+
+        .video-thumbnail-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 12px;
+            background: #000;
         }
 
         .video-thumbnail {
             width: 100%;
-            height: 180px;
+            height: 100%;
             object-fit: cover;
-            position: relative;
+            transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .video-card:hover .video-thumbnail {
+            transform: scale(1.05);
         }
 
         .play-button {
@@ -173,48 +299,97 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.8);
             border: none;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 68px;
+            height: 48px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s cubic-bezier(0.2, 0, 0, 1);
+        }
+
+        .video-card:hover .play-button {
+            opacity: 1;
         }
 
         .play-icon {
             width: 0;
             height: 0;
-            border-left: 20px solid white;
-            border-top: 12px solid transparent;
-            border-bottom: 12px solid transparent;
+            border-left: 24px solid white;
+            border-top: 14px solid transparent;
+            border-bottom: 14px solid transparent;
             margin-left: 4px;
         }
 
         .video-info {
-            padding: 16px;
+            display: flex;
+            padding: 12px 0 0 0;
+            gap: 12px;
+        }
+
+        .channel-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--md-sys-color-primary-container);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-weight: 500;
+            color: var(--md-sys-color-on-primary-container);
+        }
+
+        .video-details {
+            flex: 1;
+            min-width: 0;
         }
 
         .video-title {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #0f0f23;
+            font-family: var(--md-sys-typescale-body-large-font);
+            font-size: var(--md-sys-typescale-body-large-size);
+            font-weight: 500;
+            line-height: 1.4;
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            line-height: 1.4;
+            word-wrap: break-word;
+        }
+
+        .video-channel {
+            font-family: var(--md-sys-typescale-body-large-font);
+            font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            margin-bottom: 2px;
         }
 
         .video-meta {
-            color: #606060;
+            font-family: var(--md-sys-typescale-body-large-font);
             font-size: 14px;
+            color: var(--md-sys-color-on-surface-variant);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .video-meta::before {
+            content: "•";
+            margin: 0 4px;
+        }
+
+        .video-meta:first-child::before {
+            display: none;
         }
 
         /* Loading */
-        .loading {
+    .loading {
             text-align: center;
             padding: 40px;
             color: #606060;
@@ -237,57 +412,57 @@
         }
 
         /* Error */
-        .error {
-            background: #fef2f2;
-            border: 1px solid #fecaca;
-            color: #dc2626;
+    .error {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #dc2626;
             padding: 16px;
             border-radius: 8px;
             margin-top: 24px;
         }
 
         /* Modal */
-        .modal {
+    .modal {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.8);
             z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
+      align-items: center;
+      justify-content: center;
+    }
 
         .modal.show {
             display: flex;
-        }
+    }
 
-        .modal-content {
+    .modal-content {
             background: #000;
             border-radius: 8px;
             padding: 20px;
-            max-width: 90vw;
-            max-height: 90vh;
-            position: relative;
-        }
+      max-width: 90vw;
+      max-height: 90vh;
+      position: relative;
+    }
 
         .modal-close {
-            position: absolute;
+      position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 50%;
             width: 30px;
             height: 30px;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
         }
 
         /* Framer Section */
@@ -397,7 +572,7 @@
         }
 
         .feature-icon {
-            font-size: 2rem;
+        font-size: 2rem;
             margin-bottom: 16px;
         }
 
@@ -433,7 +608,7 @@
             border-radius: 50%;
             display: flex;
             align-items: center;
-            justify-content: center;
+        justify-content: center;
             font-weight: 600;
             margin-right: 16px;
             flex-shrink: 0;
@@ -565,13 +740,15 @@
             }
         }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <h1>YouTube RSS Feed Generator</h1>
-            <p>Create serverless YouTube RSS feeds without API keys. Perfect for Framer websites and custom integrations.</p>
+            <div class="header-content">
+                <h1>YouTube RSS Feed Generator</h1>
+                <p>Create serverless YouTube RSS feeds without API keys. Perfect for Framer websites and custom integrations.</p>
+            </div>
         </div>
     </header>
 
@@ -582,14 +759,14 @@
             <div class="section-header">
                 <h2>🚀 Generate YouTube RSS Feed</h2>
                 <p>Enter your YouTube channel details to generate a custom RSS feed URL</p>
-            </div>
+          </div>
 
             <div class="form-container">
                 <form id="rssForm">
                     <div class="form-group">
                         <label for="channelId">YouTube Channel ID:</label>
                         <input type="text" id="channelId" placeholder="e.g., UCdxk_T-82-s_J4ChPpw2sdg" required>
-                    </div>
+          </div>
 
                     <div class="form-group">
                         <label for="maxVideos">Maximum Videos:</label>
@@ -604,21 +781,21 @@
 
                     <button type="submit" class="btn" id="generateBtn">
                         Generate RSS Feed
-                    </button>
+          </button>
                 </form>
 
                 <div id="results" class="results" style="display: none;">
                     <h3>Generated RSS Feed URL:</h3>
                     <div style="background: #f3f4f6; padding: 16px; border-radius: 8px; margin: 16px 0; word-break: break-all; font-family: monospace;">
                         <span id="rssUrl"></span>
-                    </div>
+          </div>
                     <button class="btn" onclick="copyRssUrl()">Copy RSS URL</button>
-                </div>
+        </div>
 
                 <div id="videos" class="videos" style="display: none;">
                     <h3>Latest Videos:</h3>
                     <div id="videoGrid" class="video-grid"></div>
-                </div>
+      </div>
 
                 <div id="loading" class="loading" style="display: none;">
                     <div class="spinner"></div>
@@ -628,22 +805,22 @@
                 <div id="error" class="error" style="display: none;">
                     <p id="errorMessage"></p>
                 </div>
-            </div>
-
-            <!-- Video Modal -->
-            <div id="videoModal" class="modal">
-                <div class="modal-content">
+    </div>
+    
+    <!-- Video Modal -->
+    <div id="videoModal" class="modal">
+      <div class="modal-content">
                     <button class="modal-close" onclick="closeModal()">&times;</button>
-                    <iframe 
-                        id="videoFrame" 
-                        width="560" 
-                        height="315" 
-                        frameborder="0" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>
+        <iframe 
+          id="videoFrame" 
+          width="560" 
+          height="315" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
         </div>
     </main>
 
@@ -1491,16 +1668,44 @@ addPropertyControls(YouTubeGrid, {
             videos.forEach(video => {
                 const videoCard = document.createElement('div');
                 videoCard.className = 'video-card';
+                
+                // Get channel initial for avatar
+                const channelName = video.channel || 'YouTube';
+                const channelInitial = channelName.charAt(0).toUpperCase();
+                
+                // Format date
+                const publishedDate = new Date(video.published);
+                const now = new Date();
+                const diffTime = Math.abs(now - publishedDate);
+                const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                
+                let timeAgo;
+                if (diffDays === 1) {
+                    timeAgo = '1 day ago';
+                } else if (diffDays < 7) {
+                    timeAgo = `${diffDays} days ago`;
+                } else if (diffDays < 30) {
+                    timeAgo = `${Math.ceil(diffDays / 7)} weeks ago`;
+                } else {
+                    timeAgo = publishedDate.toLocaleDateString();
+                }
+                
                 videoCard.innerHTML = `
-                    <div style="position: relative;">
+                    <div class="video-thumbnail-container">
                         <img src="${video.thumbnail}" alt="${video.title}" class="video-thumbnail">
                         <button class="play-button" onclick="playVideo('${video.id}')">
                             <div class="play-icon"></div>
                         </button>
                     </div>
                     <div class="video-info">
-                        <div class="video-title">${video.title}</div>
-                        <div class="video-meta">${new Date(video.published).toLocaleDateString()}</div>
+                        <div class="channel-avatar">${channelInitial}</div>
+                        <div class="video-details">
+                            <div class="video-title">${video.title}</div>
+                            <div class="video-channel">${channelName}</div>
+                            <div class="video-meta">
+                                <span>${timeAgo}</span>
+                            </div>
+                        </div>
                     </div>
                 `;
                 videoGrid.appendChild(videoCard);
