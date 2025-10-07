@@ -439,6 +439,8 @@
       const max = document.getElementById('max').value.trim() || '10';
       if (!channelId) { alert('Enter a channelId'); return; }
       
+      console.log('Fetching videos for channel:', channelId);
+      
       // Show loading state
       const grid = document.getElementById('grid');
       grid.innerHTML = '';
@@ -458,40 +460,57 @@
       }
       
       const url = `/api/youtube-rss?channelId=${encodeURIComponent(channelId)}&format=json&max=${encodeURIComponent(max)}`;
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) { 
-        grid.innerHTML = `<div class="error">Failed to load videos (HTTP ${res.status}). Please check your channel ID.</div>`;
+      console.log('Fetching URL:', url);
+      
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        console.log('Response status:', res.status);
+        console.log('Response headers:', res.headers);
+        
+        if (!res.ok) { 
+          const errorText = await res.text();
+          console.error('Error response:', errorText);
+          grid.innerHTML = `<div class="error">Failed to load videos (HTTP ${res.status}). Error: ${errorText.slice(0, 200)}</div>`;
+          grid.className = 'grid';
+          return; 
+        }
+        
+        const data = await res.json();
+        console.log('Received data:', data);
+        
+        grid.innerHTML = '';
         grid.className = 'grid';
-        return; 
-      }
-      const data = await res.json();
-      const grid = document.getElementById('grid');
-      grid.innerHTML = '';
-      grid.className = 'grid';
-      
-      if (!data.entries || data.entries.length === 0) {
-        grid.innerHTML = '<div class="error">No videos found for this channel.</div>';
-        return;
-      }
-      
-      (data.entries || []).forEach(item => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        card.onclick = () => showVideoModal(item.id);
-        card.innerHTML = `
-          <div class="thumb-container">
-            <img class="thumb" src="${item.thumbnail || ''}" alt="" loading="lazy" />
-            <div class="play-button">
-              <div class="play-icon"></div>
+        
+        if (!data.entries || data.entries.length === 0) {
+          grid.innerHTML = '<div class="error">No videos found for this channel. Try a different channel ID.</div>';
+          return;
+        }
+        
+        console.log('Found', data.entries.length, 'videos');
+        
+        (data.entries || []).forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          card.onclick = () => showVideoModal(item.id);
+          card.innerHTML = `
+            <div class="thumb-container">
+              <img class="thumb" src="${item.thumbnail || ''}" alt="" loading="lazy" />
+              <div class="play-button">
+                <div class="play-icon"></div>
+              </div>
             </div>
-          </div>
-          <div class="content">
-            <p class="title">${(item.title || '').replace(/</g, '&lt;')}</p>
-            <p class="meta">${new Date(item.published || item.updated || Date.now()).toLocaleString()}</p>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
+            <div class="content">
+              <p class="title">${(item.title || '').replace(/</g, '&lt;')}</p>
+              <p class="meta">${new Date(item.published || item.updated || Date.now()).toLocaleString()}</p>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      } catch (error) {
+        console.error('Fetch error:', error);
+        grid.innerHTML = `<div class="error">Network error: ${error.message}</div>`;
+        grid.className = 'grid';
+      }
     }
     
     window.addEventListener('DOMContentLoaded', () => {
