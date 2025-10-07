@@ -390,6 +390,285 @@
       border-radius: 0;
     }
 
+    /* Framer Section Styles */
+    .framer-section {
+      background: white;
+      padding: 4rem 0;
+      border-top: 1px solid var(--vercel-gray-2);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0 0 1rem 0;
+      background: linear-gradient(135deg, var(--vercel-blue), var(--vercel-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .section-header p {
+      font-size: 1.125rem;
+      color: var(--vercel-gray-5);
+      margin: 0;
+    }
+
+    .framer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .framer-tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--vercel-gray-2);
+    }
+
+    .tab-btn {
+      background: none;
+      border: none;
+      padding: 1rem 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--vercel-gray-5);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn:hover {
+      color: var(--vercel-gray-7);
+    }
+
+    .tab-btn.active {
+      color: var(--vercel-blue);
+      border-bottom-color: var(--vercel-blue);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .code-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .code-header h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+
+    .copy-btn {
+      background: var(--vercel-blue);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: var(--border-radius);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--vercel-blue-light);
+    }
+
+    .code-block {
+      background: #1a1a1a;
+      color: #e5e5e5;
+      padding: 1.5rem;
+      border-radius: var(--border-radius-large);
+      overflow-x: auto;
+      font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      margin: 0;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .instructions-content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      background: var(--vercel-blue);
+      color: white;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.125rem;
+      font-weight: 600;
+    }
+
+    .step-content p {
+      margin: 0 0 1rem 0;
+      color: var(--vercel-gray-6);
+      line-height: 1.6;
+    }
+
+    .step-content ul, .step-content ol {
+      margin: 0.5rem 0;
+      padding-left: 1.5rem;
+    }
+
+    .step-content li {
+      margin-bottom: 0.25rem;
+      color: var(--vercel-gray-6);
+    }
+
+    .step-content code {
+      background: var(--vercel-gray-2);
+      padding: 0.25rem 0.5rem;
+      border-radius: 3px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 0.875rem;
+    }
+
+    .demo-content {
+      text-align: center;
+    }
+
+    .demo-content h3 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .demo-content p {
+      color: var(--vercel-gray-5);
+      margin-bottom: 2rem;
+    }
+
+    .demo-controls {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: end;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .control-group label {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--vercel-gray-6);
+    }
+
+    .control-group input, .control-group select {
+      padding: 0.5rem;
+      border: 1px solid var(--vercel-gray-3);
+      border-radius: var(--border-radius);
+      font-size: 0.875rem;
+      min-width: 120px;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .demo-card {
+      background: transparent;
+      border-radius: 0;
+      overflow: visible;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .demo-card:hover {
+      transform: translateY(-2px);
+    }
+
+    .demo-thumb-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .demo-thumb {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      background: var(--vercel-gray-2);
+      display: block;
+    }
+
+    .demo-content-text {
+      padding: 8px 0 0 0;
+    }
+
+    .demo-title {
+      font-weight: 500;
+      margin: 0 0 4px 0;
+      font-size: 14px;
+      line-height: 1.4;
+      color: #0f0f23;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .demo-meta {
+      color: #606060;
+      font-size: 12px;
+      margin: 0;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    .loading-demo {
+      text-align: center;
+      color: var(--vercel-gray-5);
+      font-style: italic;
+      padding: 2rem;
+    }
+
     @media (max-width: 768px) {
       .container {
         padding: 1rem;
@@ -522,6 +801,103 @@
       }
     }
     
+    // Tab functionality
+    function showTab(tabName) {
+      // Hide all tab contents
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      
+      // Remove active class from all tab buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      
+      // Show selected tab content
+      document.getElementById(tabName + '-tab').classList.add('active');
+      
+      // Add active class to clicked tab button
+      event.target.classList.add('active');
+      
+      // Load demo if demo tab is selected
+      if (tabName === 'demo') {
+        loadDemo();
+      }
+    }
+
+    // Copy code functionality
+    function copyCode(elementId) {
+      const codeElement = document.getElementById(elementId);
+      const text = codeElement.textContent;
+      
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        const originalText = btn.textContent;
+        btn.textContent = '✅ Copied!';
+        btn.style.background = '#10b981';
+        
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = 'var(--vercel-blue)';
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy code. Please select and copy manually.');
+      });
+    }
+
+    // Demo functionality
+    function loadDemo() {
+      const channelId = document.getElementById('demo-channel').value.trim();
+      const max = document.getElementById('demo-max').value || 6;
+      const columns = document.getElementById('demo-columns').value || 3;
+      
+      if (!channelId) {
+        document.getElementById('demo-grid').innerHTML = '<div class="error">Please enter a Channel ID</div>';
+        return;
+      }
+
+      const grid = document.getElementById('demo-grid');
+      grid.innerHTML = '<div class="loading-demo">Loading demo videos...</div>';
+      
+      const url = `/api/youtube-rss?channelId=${encodeURIComponent(channelId)}&format=json&max=${encodeURIComponent(max)}`;
+      
+      fetch(url, { cache: 'no-store' })
+        .then(async (res) => {
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+          }
+          return res.json();
+        })
+        .then((data) => {
+          grid.innerHTML = '';
+          grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+          
+          if (!data.entries || data.entries.length === 0) {
+            grid.innerHTML = '<div class="error">No videos found for this channel</div>';
+            return;
+          }
+          
+          data.entries.slice(0, max).forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'demo-card';
+            card.innerHTML = `
+              <div class="demo-thumb-container">
+                <img class="demo-thumb" src="${item.thumbnail || ''}" alt="" loading="lazy" />
+              </div>
+              <div class="demo-content-text">
+                <p class="demo-title">${(item.title || '').replace(/</g, '&lt;')}</p>
+                <p class="demo-meta">${new Date(item.published || item.updated || Date.now()).toLocaleString()}</p>
+              </div>
+            `;
+            grid.appendChild(card);
+          });
+        })
+        .catch((error) => {
+          grid.innerHTML = `<div class="error">Demo error: ${error.message}</div>`;
+        });
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       document.getElementById('channelId').value = 'UCdxk_T-82-s_J4ChPpw2sdg';
       document.getElementById('videoModal').addEventListener('click', (e) => {
@@ -578,6 +954,418 @@
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
           allowfullscreen>
         </iframe>
+      </div>
+    </div>
+
+    <!-- Framer Component Section -->
+    <div class="framer-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>🎨 Framer Component</h2>
+          <p>Drag & drop YouTube RSS feed component for Framer websites</p>
+        </div>
+
+        <div class="framer-content">
+          <div class="framer-tabs">
+            <button class="tab-btn active" onclick="showTab('code')">Component Code</button>
+            <button class="tab-btn" onclick="showTab('instructions')">Setup Instructions</button>
+            <button class="tab-btn" onclick="showTab('demo')">Live Demo</button>
+          </div>
+
+          <div id="code-tab" class="tab-content active">
+            <div class="code-header">
+              <h3>📋 Copy This Code to Framer</h3>
+              <button class="copy-btn" onclick="copyCode('framer-code')">📋 Copy Code</button>
+            </div>
+            <pre id="framer-code" class="code-block"><code>import * as React from "react";
+import { addPropertyControls, ControlType } from "framer";
+
+type Entry = {
+  id: string;
+  title?: string;
+  link?: string;
+  thumbnail?: string;
+  published?: string;
+  updated?: string;
+};
+
+type Props = {
+  domain: string;
+  channelId?: string;
+  handle?: string;
+  max: number;
+  columns: number;
+  gap: number;
+  thumbnailHeight: number;
+  titleColor: string;
+  metaColor: string;
+  titleFontSize: number;
+  titleFontWeight: number;
+  metaFontSize: number;
+  showMeta: boolean;
+  enableAutoplay: boolean;
+  autoplayWidth: number;
+  autoplayHeight: number;
+};
+
+export default function YouTubeGrid(props: Partial&lt;Props&gt;) {
+  const {
+    domain = "myyoutubefeed-gckq6ezwj-danieleloma-wonderadsios-projects.vercel.app",
+    channelId = "UCdxk_T-82-s_J4ChPpw2sdg",
+    handle = "",
+    max = 12,
+    columns = 3,
+    gap = 20,
+    thumbnailHeight = 180,
+    titleColor = "#0f0f23",
+    metaColor = "#606060",
+    titleFontSize = 14,
+    titleFontWeight = 500,
+    metaFontSize = 12,
+    showMeta = true,
+    enableAutoplay = false,
+    autoplayWidth = 560,
+    autoplayHeight = 315,
+  } = props;
+
+  const [entries, setEntries] = React.useState&lt;Entry[]&gt;([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState&lt;string | null&gt;(null);
+  const [playingVideo, setPlayingVideo] = React.useState&lt;string | null&gt;(null);
+
+  React.useEffect(() =&gt; {
+    const qs = new URLSearchParams();
+    if (handle) {
+      qs.set("handle", handle);
+    } else {
+      qs.set("channelId", channelId);
+    }
+    qs.set("format", "json");
+    qs.set("max", String(max));
+
+    const url = `https://${domain}/api/youtube-rss?${qs.toString()}`;
+
+    let active = true;
+    setLoading(true);
+    setError(null);
+
+    fetch(url, { cache: "no-store" })
+      .then(async (r) =&gt; {
+        if (!r.ok) {
+          const text = await r.text().catch(() =&gt; "");
+          throw new Error(`HTTP ${r.status} ${r.statusText}: ${text.slice(0, 200)}`);
+        }
+        return r.json();
+      })
+      .then((d) =&gt; {
+        if (!active) return;
+        setEntries(Array.isArray(d?.entries) ? d.entries : []);
+      })
+      .catch((e) =&gt; active &&amp; setError(e.message || "Failed to load"))
+      .finally(() =&gt; active &&amp; setLoading(false));
+
+    return () =&gt; {
+      active = false;
+    };
+  }, [domain, channelId, handle, max]);
+
+  const gridStyle: React.CSSProperties = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${Math.max(1, columns)}, minmax(280px, 1fr))`,
+    gap,
+  };
+
+  const handleVideoClick = (videoId: string) =&gt; {
+    if (enableAutoplay) {
+      setPlayingVideo(videoId);
+    } else {
+      window.open(`https://www.youtube.com/watch?v=${videoId}`, '_blank', 'noopener,noreferrer');
+    }
+  };
+
+  if (error) {
+    return React.createElement("div", {
+      style: { ...gridStyle, color: "#ef4444", fontFamily: "Inter, system-ui, sans-serif" }
+    }, `Error: ${error}`);
+  }
+
+  if (loading) {
+    return React.createElement("div", { style: gridStyle },
+      Array.from({ length: Math.min(max, columns * 2) }).map((_, i) =&gt;
+        React.createElement("div", { key: i, style: { display: "flex", flexDirection: "column" } },
+          React.createElement("div", { style: { width: "100%", height: thumbnailHeight, background: "#f3f4f6", borderRadius: 12 } }),
+          React.createElement("div", { style: { padding: "8px 0 0 0" } },
+            React.createElement("div", { style: { width: "80%", height: 14, background: "#e5e7eb", marginBottom: 8, borderRadius: 4 } }),
+            React.createElement("div", { style: { width: "60%", height: 10, background: "#f3f4f6", borderRadius: 4 } })
+          )
+        )
+      )
+    );
+  }
+
+  return React.createElement(React.Fragment, null,
+    playingVideo &&amp; React.createElement("div", {
+      style: {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: "rgba(0, 0, 0, 0.8)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        zIndex: 1000,
+      },
+      onClick: () =&gt; setPlayingVideo(null)
+    },
+      React.createElement("div", {
+        style: {
+          background: "#000",
+          borderRadius: 8,
+          padding: 20,
+          maxWidth: "90vw",
+          maxHeight: "90vh",
+          position: "relative",
+        },
+        onClick: (e: any) =&gt; e.stopPropagation()
+      },
+        React.createElement("button", {
+          onClick: () =&gt; setPlayingVideo(null),
+          style: {
+            position: "absolute",
+            top: 10,
+            right: 10,
+            background: "rgba(0, 0, 0, 0.7)",
+            color: "white",
+            border: "none",
+            borderRadius: "50%",
+            width: 30,
+            height: 30,
+            cursor: "pointer",
+            fontSize: 18,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }
+        }, "×"),
+        React.createElement("iframe", {
+          width: autoplayWidth,
+          height: autoplayHeight,
+          src: `https://www.youtube.com/embed/${playingVideo}?autoplay=1&amp;rel=0`,
+          title: "YouTube video player",
+          frameBorder: 0,
+          allow: "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture",
+          allowFullScreen: true
+        })
+      )
+    ),
+    React.createElement("div", { style: gridStyle },
+      entries.map((e, i) =&gt; {
+        const videoId = e.id;
+        return React.createElement("div", {
+          key: i,
+          onClick: () =&gt; handleVideoClick(videoId),
+          style: {
+            cursor: "pointer",
+            display: "flex",
+            flexDirection: "column",
+            transition: "transform 0.2s",
+          },
+          onMouseEnter: (e: any) =&gt; {
+            e.currentTarget.style.transform = "translateY(-2px)";
+          },
+          onMouseLeave: (e: any) =&gt; {
+            e.currentTarget.style.transform = "translateY(0)";
+          }
+        },
+          React.createElement("div", { style: { position: "relative", borderRadius: 12, overflow: "hidden" } },
+            e.thumbnail &&amp; React.createElement(React.Fragment, null,
+              React.createElement("img", {
+                src: e.thumbnail,
+                alt: "",
+                style: {
+                  width: "100%",
+                  height: thumbnailHeight,
+                  objectFit: "cover",
+                  display: "block",
+                }
+              }),
+              enableAutoplay &&amp; React.createElement("div", {
+                style: {
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  transform: "translate(-50%, -50%)",
+                  background: "rgba(0, 0, 0, 0.7)",
+                  borderRadius: "50%",
+                  width: 60,
+                  height: 60,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  cursor: "pointer",
+                }
+              },
+                React.createElement("div", {
+                  style: {
+                    width: 0,
+                    height: 0,
+                    borderLeft: "20px solid white",
+                    borderTop: "12px solid transparent",
+                    borderBottom: "12px solid transparent",
+                    marginLeft: 4,
+                  }
+                })
+              )
+            )
+          ),
+          React.createElement("div", { style: { padding: "8px 0 0 0" } },
+            React.createElement("div", {
+              style: {
+                fontWeight: titleFontWeight,
+                marginBottom: showMeta ? 4 : 0,
+                fontSize: titleFontSize,
+                lineHeight: 1.4,
+                color: titleColor,
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+                overflow: "hidden",
+              }
+            }, e.title),
+            showMeta &&amp; React.createElement("div", {
+              style: { 
+                color: metaColor, 
+                fontSize: metaFontSize, 
+                margin: 0,
+                lineHeight: 1.4,
+              }
+            }, new Date(e.published || e.updated || Date.now()).toLocaleString())
+          )
+        );
+      })
+    )
+  );
+}
+
+addPropertyControls(YouTubeGrid, {
+  domain: { type: ControlType.String, title: "Domain", defaultValue: "myyoutubefeed-gckq6ezwj-danieleloma-wonderadsios-projects.vercel.app" },
+  channelId: { type: ControlType.String, title: "Channel ID", defaultValue: "UCdxk_T-82-s_J4ChPpw2sdg" },
+  handle: { type: ControlType.String, title: "Handle (@...)", defaultValue: "" },
+  max: { type: ControlType.Number, title: "Max Videos", min: 1, max: 50, defaultValue: 12 },
+  columns: { type: ControlType.Number, title: "Columns", min: 1, max: 6, defaultValue: 3 },
+  gap: { type: ControlType.Number, title: "Gap (px)", min: 0, max: 48, defaultValue: 20 },
+  thumbnailHeight: { type: ControlType.Number, title: "Thumb Height", min: 120, max: 400, defaultValue: 180 },
+  titleColor: { type: ControlType.Color, title: "Title Color", defaultValue: "#0f0f23" },
+  metaColor: { type: ControlType.Color, title: "Meta Color", defaultValue: "#606060" },
+  titleFontSize: { type: ControlType.Number, title: "Title Font Size", min: 10, max: 24, defaultValue: 14 },
+  titleFontWeight: { type: ControlType.Number, title: "Title Font Weight", min: 300, max: 700, defaultValue: 500 },
+  metaFontSize: { type: ControlType.Number, title: "Meta Font Size", min: 8, max: 18, defaultValue: 12 },
+  showMeta: { type: ControlType.Boolean, title: "Show Meta", defaultValue: true },
+  enableAutoplay: { type: ControlType.Boolean, title: "Enable Autoplay", defaultValue: false },
+  autoplayWidth: { type: ControlType.Number, title: "Video Width", min: 320, max: 1280, defaultValue: 560 },
+  autoplayHeight: { type: ControlType.Number, title: "Video Height", min: 180, max: 720, defaultValue: 315 },
+});</code></pre>
+          </div>
+
+          <div id="instructions-tab" class="tab-content">
+            <div class="instructions-content">
+              <h3>🚀 How to Add This Component to Framer</h3>
+              
+              <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                  <h4>Create a Code Component</h4>
+                  <p>In your Framer project, click the <strong>"+"</strong> button and select <strong>"Code Component"</strong>.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                  <h4>Copy the Code</h4>
+                  <p>Copy the entire code from the "Component Code" tab above and paste it into your new code component.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                  <h4>Save & Name</h4>
+                  <p>Save the component and give it a name like <strong>"YouTube Grid"</strong> or <strong>"Video Feed"</strong>.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                  <h4>Drag to Canvas</h4>
+                  <p>Find your component in the components panel and drag it onto your canvas.</p>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                  <h4>Customize</h4>
+                  <p>Use the property controls to customize:</p>
+                  <ul>
+                    <li><strong>Channel ID:</strong> Your YouTube channel ID</li>
+                    <li><strong>Max Videos:</strong> Number of videos to show</li>
+                    <li><strong>Columns:</strong> Grid layout (1-6 columns)</li>
+                    <li><strong>Colors:</strong> Title and metadata colors</li>
+                    <li><strong>Fonts:</strong> Title and meta font sizes and weights</li>
+                    <li><strong>Autoplay:</strong> Enable modal video playback</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                  <h4>Get Your Channel ID</h4>
+                  <p>To find your YouTube Channel ID:</p>
+                  <ol>
+                    <li>Go to your YouTube channel</li>
+                    <li>Look at the URL: <code>youtube.com/channel/CHANNEL_ID</code></li>
+                    <li>Or use our tool above to search by username</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="demo-tab" class="tab-content">
+            <div class="demo-content">
+              <h3>🎬 Live Component Demo</h3>
+              <p>See how the component looks and behaves in different configurations:</p>
+              
+              <div class="demo-controls">
+                <div class="control-group">
+                  <label>Channel ID:</label>
+                  <input type="text" id="demo-channel" value="UCdxk_T-82-s_J4ChPpw2sdg" />
+                </div>
+                <div class="control-group">
+                  <label>Max Videos:</label>
+                  <input type="number" id="demo-max" value="6" min="1" max="12" />
+                </div>
+                <div class="control-group">
+                  <label>Columns:</label>
+                  <select id="demo-columns">
+                    <option value="1">1 Column</option>
+                    <option value="2">2 Columns</option>
+                    <option value="3" selected>3 Columns</option>
+                    <option value="4">4 Columns</option>
+                  </select>
+                </div>
+                <button class="btn btn-secondary" onclick="loadDemo()">🔄 Update Demo</button>
+              </div>
+
+              <div id="demo-grid" class="demo-grid"></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </body>
