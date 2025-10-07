@@ -457,10 +457,10 @@
         grid.appendChild(skeleton);
       }
       
-      const url = `/youtube-rss?channelId=${encodeURIComponent(channelId)}&format=json&max=${encodeURIComponent(max)}`;
+      const url = `/api/youtube-rss?channelId=${encodeURIComponent(channelId)}&format=json&max=${encodeURIComponent(max)}`;
       const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) { 
-        grid.innerHTML = '<div class="error">Failed to load videos. Please check your channel ID.</div>';
+        grid.innerHTML = `<div class="error">Failed to load videos (HTTP ${res.status}). Please check your channel ID.</div>`;
         grid.className = 'grid';
         return; 
       }
