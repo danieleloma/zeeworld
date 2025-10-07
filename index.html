@@ -830,7 +830,7 @@
                 <div id="code-tab" class="tab-content active">
                     <div class="code-header">
                         <h3>📋 Copy This Code to Framer</h3>
-                        <button class="copy-btn" onclick="copyCode('framer-code')">📋 Copy Code</button>
+                        <button class="copy-btn" onclick="copyCode('framer-code', this)">📋 Copy Code</button>
                     </div>
                     <pre id="framer-code" class="code-block"><code>import * as React from "react";
 import { addPropertyControls, ControlType } from "framer";
@@ -1742,19 +1742,20 @@ addPropertyControls(YouTubeGrid, {
         }
 
         // Copy code functionality
-        function copyCode(elementId) {
+        function copyCode(elementId, buttonElement) {
             const codeElement = document.getElementById(elementId);
             const text = codeElement.textContent;
             
             navigator.clipboard.writeText(text).then(() => {
-                const btn = event.target;
-                const originalText = btn.textContent;
-                btn.textContent = '✅ Copied!';
-                btn.classList.add('clicked');
+                const originalText = buttonElement.textContent;
+                buttonElement.textContent = '✅ Copied!';
+                buttonElement.classList.add('clicked');
                 setTimeout(() => {
-                    btn.textContent = originalText;
-                    btn.classList.remove('clicked');
+                    buttonElement.textContent = originalText;
+                    buttonElement.classList.remove('clicked');
                 }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
             });
         }
 
