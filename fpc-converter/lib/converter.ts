@@ -74,18 +74,41 @@ export function convertToRows(
     console.log(`${index + 1}. ${row.Title} - ${row['Start Time']}-${row['End Time']} (${row.Timezone}) on ${row.Date}`);
   });
 
+  // STEP 1: Detect the broadcast day start time dynamically
+  // Find the earliest time that appears in the data
+  const allTimes = rows.map(row => row['Start Time']);
+  const uniqueTimes = Array.from(new Set(allTimes)).sort();
+  
+  // Find the first time in the schedule (should be 05:00 or 06:00 typically)
+  // We assume the broadcast day starts with the earliest non-midnight hour
+  let broadcastDayStartHour = 5; // Default to 5 if we can't detect
+  
+  if (uniqueTimes.length > 0) {
+    // Find the first time that's >= 05:00 (morning times)
+    const morningTimes = uniqueTimes.filter(time => {
+      const hour = parseInt(time.split(':')[0], 10);
+      return hour >= 5 && hour < 12;
+    });
+    
+    if (morningTimes.length > 0) {
+      const firstMorningTime = morningTimes[0];
+      broadcastDayStartHour = parseInt(firstMorningTime.split(':')[0], 10);
+      console.log(`Detected broadcast day start hour: ${broadcastDayStartHour}:00`);
+    }
+  }
+
   // Sort rows with proper timezone ordering (WAT before CAT)
   const tzOrder = options.timezoneOrder;
   console.log(`Sorting with timezone order: ${tzOrder.join(', ')}`);
 
   // Helper function to convert time to sortable value
-  // Broadcast day starts at 05:00, so times 00:00-04:59 should sort after 23:59
+  // Broadcast day starts at detected hour (e.g., 05:00 or 06:00), so times before that should sort after 23:59
   const timeToSortValue = (time: string): number => {
     const [hours, minutes] = time.split(':').map(Number);
     const totalMinutes = hours * 60 + minutes;
     
-    // If time is between 00:00 and 04:59, add 24 hours to make it sort after 23:59
-    if (hours < 5) {
+    // If time is before the broadcast day start hour, add 24 hours to make it sort after 23:59
+    if (hours < broadcastDayStartHour) {
       return totalMinutes + (24 * 60);
     }
     return totalMinutes;
