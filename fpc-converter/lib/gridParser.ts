@@ -410,8 +410,9 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
       const processedRows = new Set<number>();
 
       // Process each row in the time column
-      // Start from row 3 to skip title, timezone headers, and day headers
-      for (let row = 3; row < data.length; row++) {
+      // Start from row 2 to skip title, timezone headers, and day headers
+      // Row 0: timezone header, Row 1: dates, Row 2: first time slot
+      for (let row = 2; row < data.length; row++) {
         if (processedRows.has(row)) continue;
 
         const timeCell = data[row]?.[timeColIdx];
