@@ -62,6 +62,7 @@ export function convertToRows(
         // Log first few rows for debugging
         if (rows.length <= 5) {
           console.log(`Row ${rows.length}: ${newRow.Title} at ${newRow['Start Time']}-${newRow['End Time']} (${newRow.Timezone})`);
+          console.log(`  Cell data: time="${cell.time}", endTime="${cell.endTime}", text="${cell.text}"`);
         }
       }
     }
