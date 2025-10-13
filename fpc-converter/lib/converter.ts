@@ -69,6 +69,10 @@ export function convertToRows(
   }
 
   console.log(`\nCreated ${rows.length} total rows`);
+  console.log("Sample rows BEFORE sorting:");
+  rows.slice(0, 5).forEach((row, index) => {
+    console.log(`${index + 1}. ${row.Title} - ${row['Start Time']}-${row['End Time']} (${row.Timezone}) on ${row.Date}`);
+  });
 
   // Sort rows with proper timezone ordering (WAT before CAT)
   const tzOrder = options.timezoneOrder;
