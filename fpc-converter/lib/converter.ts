@@ -78,15 +78,30 @@ export function convertToRows(
   const tzOrder = options.timezoneOrder;
   console.log(`Sorting with timezone order: ${tzOrder.join(', ')}`);
 
+  // Helper function to convert time to sortable value
+  // Broadcast day starts at 05:00, so times 00:00-04:59 should sort after 23:59
+  const timeToSortValue = (time: string): number => {
+    const [hours, minutes] = time.split(':').map(Number);
+    const totalMinutes = hours * 60 + minutes;
+    
+    // If time is between 00:00 and 04:59, add 24 hours to make it sort after 23:59
+    if (hours < 5) {
+      return totalMinutes + (24 * 60);
+    }
+    return totalMinutes;
+  };
+
   rows.sort((a, b) => {
     // First by date
     if (a.Date !== b.Date) {
       return a.Date.localeCompare(b.Date);
     }
     
-    // Then by start time
+    // Then by start time (with broadcast day logic: 05:00-04:59)
     if (a['Start Time'] !== b['Start Time']) {
-      return a['Start Time'].localeCompare(b['Start Time']);
+      const aTime = timeToSortValue(a['Start Time']);
+      const bTime = timeToSortValue(b['Start Time']);
+      return aTime - bTime;
     }
     
     // Then by timezone order (WAT before CAT)
