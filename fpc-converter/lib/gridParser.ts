@@ -301,8 +301,9 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
     }
 
     // STEP 3: Extract all time labels from the time column
+    // Start from row 3 to skip the title (row 0), timezone headers (row 1), and day headers (row 2)
     const timeLabels: string[] = [];
-    for (let row = 0; row < data.length; row++) {
+    for (let row = 3; row < data.length; row++) {
       const timeCell = data[row]?.[timeColIdx];
       const formattedTime = fmtTimeLabel(timeCell);
       if (formattedTime) {
@@ -409,7 +410,8 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
       const processedRows = new Set<number>();
 
       // Process each row in the time column
-      for (let row = 0; row < data.length; row++) {
+      // Start from row 3 to skip title, timezone headers, and day headers
+      for (let row = 3; row < data.length; row++) {
         if (processedRows.has(row)) continue;
 
         const timeCell = data[row]?.[timeColIdx];
