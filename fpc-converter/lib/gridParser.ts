@@ -252,6 +252,8 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
     }
   }
 
+  console.log('Found timezone columns:', timezoneCols);
+
   if (timezoneCols.length === 0) {
     issues.push('No timezone columns (WAT/CAT/EAT) found');
     return { timezoneBlocks, issues };
@@ -324,13 +326,16 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
     const days: Array<{ weekday: string | null; iso: string | null; colIdx: number }> = [];
     
     // Start looking for day columns after the timezone columns
+    // Based on the file structure, day columns start from column 2
     const startCol = Math.max(...timezoneCols.map(tz => tz.colIdx)) + 1;
+    console.log(`Looking for day columns starting from column ${startCol}`);
     
     for (let col = startCol; col < (data[0]?.length || 0); col++) {
       let foundWeekday = null;
       let foundDate = null;
       
       // Look for day/date headers in first few rows
+      // Based on the file structure: row 1 has weekdays, row 2 has dates
       for (let row = 0; row < Math.min(5, data.length); row++) {
         const cell = String(data[row]?.[col] || '');
         const weekday = extractWeekday(cell);
@@ -347,7 +352,7 @@ export function parseGrid(workbook: XLSX.WorkBook): ParsedGrid {
       } else {
         // Check if this column has program content (infer day)
         let hasProgramContent = false;
-        for (let row = 2; row < Math.min(20, data.length); row++) {
+        for (let row = 3; row < Math.min(20, data.length); row++) { // Start from row 3 where shows begin
           const cell = String(data[row]?.[col] || '').trim();
           if (cell && cell !== '' && cell !== '—' && cell !== '-' && !fmtTimeLabel(cell)) {
             hasProgramContent = true;
