@@ -74,27 +74,14 @@ export function convertToRows(
     console.log(`${index + 1}. ${row.Title} - ${row['Start Time']}-${row['End Time']} (${row.Timezone}) on ${row.Date}`);
   });
 
-  // STEP 1: Detect the broadcast day start time dynamically
-  // Find the earliest time that appears in the data
-  const allTimes = rows.map(row => row['Start Time']);
-  const uniqueTimes = Array.from(new Set(allTimes)).sort();
+  // STEP 1: Detect the broadcast day start time from the first show in the Excel sheet
+  // The first row we created represents the first show from the Excel file
+  let broadcastDayStartHour = 5; // Default fallback
   
-  // Find the first time in the schedule (should be 05:00 or 06:00 typically)
-  // We assume the broadcast day starts with the earliest non-midnight hour
-  let broadcastDayStartHour = 5; // Default to 5 if we can't detect
-  
-  if (uniqueTimes.length > 0) {
-    // Find the first time that's >= 05:00 (morning times)
-    const morningTimes = uniqueTimes.filter(time => {
-      const hour = parseInt(time.split(':')[0], 10);
-      return hour >= 5 && hour < 12;
-    });
-    
-    if (morningTimes.length > 0) {
-      const firstMorningTime = morningTimes[0];
-      broadcastDayStartHour = parseInt(firstMorningTime.split(':')[0], 10);
-      console.log(`Detected broadcast day start hour: ${broadcastDayStartHour}:00`);
-    }
+  if (rows.length > 0) {
+    const firstShowTime = rows[0]['Start Time'];
+    broadcastDayStartHour = parseInt(firstShowTime.split(':')[0], 10);
+    console.log(`Detected broadcast day start time from first show: ${firstShowTime} (hour: ${broadcastDayStartHour})`);
   }
 
   // Sort rows with proper timezone ordering (WAT before CAT)
